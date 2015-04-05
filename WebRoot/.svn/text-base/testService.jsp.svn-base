@@ -1,0 +1,29 @@
+<%@ page language="java" import="java.util.*" pageEncoding="GB18030"%>
+<%@ taglib prefix="s" uri="/struts-tags" %>
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    
+    <title>My Test Web Service page</title>
+	<meta http-equiv="pragma" content="no-cache">
+	<meta http-equiv="cache-control" content="no-cache">
+	<meta http-equiv="expires" content="0">    
+	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+	<meta http-equiv="description" content="This is my page">
+	<!--
+	<link rel="stylesheet" type="text/css" href="styles.css">
+	-->
+  </head>
+  
+  <body>
+    <a href="serviceweb?method=InsertDevInsData">Test InsertDevInsData </a><br>
+    <a href="serviceweb?method=AlertToApp">Test AlertToApp </a><br>
+    <a href="serviceweb?method=ControlDevByInsID">Test ControlDevByInsID </a><br>
+    <a href="serviceweb?method=GetDevInsRangeList">Test GetDevInsRangeList </a><br>
+    <a href="serviceweb?method=ModifyDevInsRange">Test ModifyDevInsRange </a><br>
+    <a href="serviceweb?method=GetDevDataByInsID">Test GetDevDataByInsID </a><br>
+    <a href="serviceweb?method=GetUserSubscribe">Test GetUserSubscribe </a><br>
+    <a href="serviceweb?method=SetUserSubscribe">Test SetUserSubscribe </a><br>
+  </body>
+</html>

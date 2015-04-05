@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+	<constant name="struts.objectFactory" value="spring" />
+	<constant name="struts.enable.DynamicMethodInvocation" value="false" />
+    <constant name="struts.devMode" value="true" />
+    <constant name="struts.i18n.encoding" value="utf-8" />
+    
+	<package name="action" extends="struts-default">
+		<action name="regist" class="com.bugManage.actions.RegistAction">
+			<result name="success" type="redirectAction">projectList</result>
+			<result name="input">/Regist.jsp</result>
+		</action>
+		<action name="login" class="com.bugManage.actions.LoginAction">
+			<result name="success" type="redirectAction">projectList</result>
+			<result name="login">Login.jsp</result>
+			<result name="input">/Login.jsp</result>
+		</action>
+		<action name="loginOut" class="com.bugManage.actions.LoginOutAction">
+			<result name="success">Login.jsp</result>
+		</action>
+		<action name="addBug" class="com.bugManage.actions.AddBugAction">
+			<result name="success">AllBug.jsp</result>
+			<result name="error">MyJsp.jsp</result>
+			<result name="input">/AddBug.jsp</result>
+		</action>
+		<action name="bugList" class="com.bugManage.actions.BugListAction">
+			<result name="success">AllBug.jsp</result>
+			<result name="error">/MyJsp.jsp</result>
+		</action>
+		<action name="bugSearch" class="com.bugManage.actions.BugSearchAction">
+			<result name="success">AllBug.jsp</result>
+			<result name="error">/MyJsp.jsp</result>
+		</action>
+		<action name="bugDetail" class="com.bugManage.actions.BugDetailAction">
+			<result name="success">BugDetail.jsp</result>
+			<result name="error">/MyJsp.jsp</result>
+		</action>
+		<action name="modifyBugInfo" class="com.bugManage.actions.ModifyBugAction">
+			<result name="success">AllBug.jsp</result>
+			<result name="error">/MyJsp.jsp</result>
+		</action>
+		<action name="projectList" class="com.bugManage.actions.ProjectListAction">
+			<result name="success">ProjectList.jsp</result>
+			<result name="error">/MyJsp.jsp</result>
+		</action>
+		<action name="createProject" class="com.bugManage.actions.CreateProjectAction">
+			<result name="success" type="redirectAction">projectList</result>
+			<result name="error">/MyJsp.jsp</result>
+		</action>
+		<action name="myBug" class="com.bugManage.actions.MyBugAction">
+			<result name="success">MyBug.jsp</result>
+			<result name="error">/MyJsp.jsp</result>
+		</action>
+		<action name="mybugSearch" class="com.bugManage.actions.MySearchAction">
+			<result name="success">MyBug.jsp</result>
+			<result name="error">/MyJsp.jsp</result>
+		</action>
+		<!-- 
+		<action name="myBugSearch" class="com.bugManage.actions.MyBugSearchAction">
+			<result name="success">MyBug.jsp</result>
+			<result name="error">/MyJsp.jsp</result>
+		</action>
+		 -->
+		<action name="projectBugList" class="com.bugManage.actions.ProjectBugListAction">
+			<result name="success">AllBug.jsp</result>
+			<result name="error">/MyJsp.jsp</result>
+		</action>
+		<action name="myFindBug" class="com.bugManage.actions.MyFindBugAction">
+			<result name="success">MyCreateBug.jsp</result>
+			<result name="error">/MyJsp.jsp</result>
+		</action>
+		<action name="MyFindBugSearch" class="com.bugManage.actions.MyFindBugSearchAction">
+			<result name="success">MyCreateBug.jsp</result>
+			<result name="error">/MyJsp.jsp</result>
+		</action>
+		<action name="projectInfo" class="com.bugManage.actions.ProjectInfoAction">
+			<result name="success">ProjectInfo.jsp</result>
+			<result name="error">/MyJsp.jsp</result>
+		</action>
+		<action name="userList" class="com.bugManage.actions.UserListAction">
+			<result name="success">AddBug.jsp</result>
+			<result name="error">/MyJsp.jsp</result>
+		</action>
+	</package>
+</struts>

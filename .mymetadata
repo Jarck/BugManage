@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="BugManageTest"
+  id="myeclipse.1345511852999"
+  context-root="/BugManageTest"
+  j2ee-spec="5.0"
+  archive="BugManageTest.war">
+  <attributes>
+    <attribute name="webrootdir" value="/WebRoot" />
+  </attributes>
+</project-module>
+

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
+		<property name="url" value="jdbc:mysql://127.0.0.1:3306/ctia"></property>
+		<property name="username" value="root"></property>
+		<property name="password" value="123"></property>
+	</bean>
+	<bean id="sessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		<property name="dataSource">
+			<ref bean="dataSource" />
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+				<!--Show SQL-->
+				<prop key="hibernate.show_sql">false</prop>
+				<prop key="hibernate.jdbc.batch_size">50</prop>
+			</props>
+		</property>
+		<property name="mappingResources">
+			<list>
+				<value>com/ctia/entity/AlertData.hbm.xml</value>
+				<value>com/ctia/entity/ApiCallHistory.hbm.xml</value>
+				<value>com/ctia/entity/ApiCallHistoryBak.hbm.xml</value>
+				<value>com/ctia/entity/ApiLogHistory.hbm.xml</value>
+				<value>com/ctia/entity/ControlCommandHistory.hbm.xml</value>
+				<value>com/ctia/entity/DevinsData.hbm.xml</value>
+				<value>com/ctia/entity/DevinsDataBak.hbm.xml</value>
+				<value>com/ctia/entity/DevinsRange.hbm.xml</value>
+				<value>com/ctia/entity/EntityEyeData.hbm.xml</value>
+				<value>com/ctia/entity/SubscriptionSendData.hbm.xml</value>
+				<value>com/ctia/entity/SubscriptionSetting.hbm.xml</value>
+				<value>com/ctia/entity/LogHistory.hbm.xml</value>
+				<value>com/ctia/entity/UserSubscription.hbm.xml</value>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="transactionManager" 
+		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
+	<bean id="baseTranProxy" abstract="true"
+	   	class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+	   	<property name="transactionManager" ref="transactionManager" />
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+		   	</props>
+	   	</property>
+	</bean>
+
+	<bean id="hibernateDaoTarget" class="com.ctia.dao.hibernate.HibernateDaoImpl">
+    	<property name="sessionFactory" ref="sessionFactory"></property>
+    </bean>
+    
+	<bean id="hibernateDao" parent="baseTranProxy">
+		<property name="target">
+            <ref bean="hibernateDaoTarget"/>
+        </property>
+    </bean>
+    
+	<bean id="bizPlatformWebService" class="com.ctia.webservice.BizPlatformWebService">
+    	<property name="hibernateDao" ref="hibernateDao"></property>
+    </bean>
+
+	<bean id="webServiceAction" class="com.ctia.actions.WebServiceAction">
+    	<property name="bizPlatformWebService" ref="bizPlatformWebService"></property>
+    </bean>
+    
+    <bean id="tracelog" class="com.ctia.util.TraceLog" scope="singleton">
+    	<property name="hibernateDao" ref="hibernateDao"></property>
+    </bean>    
+
+	<!--
+	<bean id="userDao" class="com.ctia.dao.hibernate.UserDaoImpl">
+    	<property name="sessionFactory" ref="sessionFactory"></property>
+    </bean>
+    
+	
+	<bean id="userService" class="com.ctia.service.hibernate.UserServiceImpl">
+    	<property name="userDao" ref="userDao"></property>
+    </bean>
+    
+    <bean id="loginAction" class="com.ctia.actions.LoginAction" scope="prototype">
+    	<property name="userService" ref="userService"></property>
+    </bean-->
+</beans>
